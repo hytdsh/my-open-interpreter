@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  openint:
+    build: .
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    tty: true
+    volumes:
+      - ./work:/home/openint/work
