@@ -33,9 +33,6 @@ RUN echo "openint ALL=(ALL:ALL) NOPASSWD: ALL" >/etc/sudoers.d/openint
 USER openint
 WORKDIR /home/openint
 
-RUN mkdir bin && bash -c '(echo && echo "PATH=\"$HOME/bin:$PATH\"")' >>${HOME}/.bashrc
-COPY 3.5-turbo.py 3.5-turbo-16k.py 4.py 4-32k.py tokenizer.py bin/
-
 RUN python -m venv python \
     && . python/bin/activate \
     && pip install \
@@ -46,3 +43,6 @@ RUN python -m venv python \
         pandas \
         tiktoken
 RUN bash -c '(echo && echo "source ~/python/bin/activate")' >>${HOME}/.bashrc
+
+RUN mkdir bin && bash -c '(echo && echo "PATH=\"\$HOME/bin:\$PATH\"")' >>${HOME}/.bashrc
+COPY 3.5-turbo.py 3.5-turbo-16k.py 4.py 4-32k.py tokenizer.py bin/
